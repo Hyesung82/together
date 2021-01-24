@@ -75,6 +75,10 @@ public class MyFragment extends Fragment {
         lvLogout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                LogoutDialogFragment dialog = new LogoutDialogFragment();
+                assert getFragmentManager() != null;
+//                dialog.show(getFragmentManager(), "로그아웃");
+
                 UserApiClient.getInstance().unlink((error) -> {
                     if (error != null) {
                         Log.e(TAG, "로그아웃(연결 끊기) 실패.", error);
@@ -129,10 +133,11 @@ public class MyFragment extends Fragment {
                                                 } else if (emailUser != null) {
                                                     Log.i(TAG, "이메일: " + emailUser.getKakaoAccount().getEmail());
                                                     userEmail.setText(emailUser.getKakaoAccount().getEmail());
+                                                    userName.setText(emailUser.getKakaoAccount().getProfile().getNickname());
 
-                                                    // TODO: Room 사용해서 UI가 데이터 변화를 감지하도록 변경
+                                                    // TODO: Room 사용해서 UI가 데이터 변화를 감지하도록 변경경
                                                 }
-                                                return null;
+                                               return null;
                                             });
                                 }
                                 return null;
